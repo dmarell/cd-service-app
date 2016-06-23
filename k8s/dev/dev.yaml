@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: cd-service-app-dev
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: backend
+      labels:
+        app: cd-service-app
+        role: backend
+        env: dev
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/cloud-solutions-images/cd-service-app:1.0.0
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        command: ["sh", "-c", "app -port=8080"]
+        ports:
+        - name: backend
+          containerPort: 8080
