@@ -6,6 +6,9 @@ node {
 
   checkout scm
 
+  stage 'Build maven artifact'
+  sh 'mvn clean package'
+
   stage 'Build image'
   sh("docker build -t ${imageTag} .")
 
