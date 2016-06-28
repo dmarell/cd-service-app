@@ -4,6 +4,8 @@ node {
   def feSvcName = "${appName}"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
+  env.PATH = "${tool 'maven-3'}/bin:${env.PATH}"
+
   checkout scm
 
   stage 'Build maven artifact'
