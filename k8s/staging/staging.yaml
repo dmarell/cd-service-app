@@ -23,7 +23,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: 8090
         command: ["sh", "-c", "app -port=8080"]
         ports:
         - name: backend
